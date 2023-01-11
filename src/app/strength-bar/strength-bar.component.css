@@ -1,0 +1,54 @@
+:host {
+  display: block;
+}
+
+.header {
+  display: flex;
+  margin: 0px 0px 7px 0px;
+  padding: 0px 0px 0px 0px;
+  &__title {
+    font-weight: bold;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+  }
+
+  &__strength {
+    font-weight: bold;
+    margin: 0px 0px 0px auto;
+    padding: 0px 0px 0px 0px;
+  }
+}
+
+.meter {
+  background-color: #cccccc;
+  border-radius: 5px 5px 5px 5px;
+  height: 15px;
+  overflow: hidden;
+
+  &__strength {
+    border-radius: 5px 5px 5px 5px;
+    display: block;
+    height: 100%;
+    transition: width 200ms ease;
+    width: 0px;
+  }
+  &--length &__strength {
+    background-color: red;
+    width: 100%;
+  }
+
+  &--1 &__strength {
+    background-color: red;
+    width: 20%;
+  }
+
+  &--2 &__strength {
+    background-color: orange;
+    width: 60%;
+  }
+
+  &--3 &__strength {
+    background-color: green;
+    width: 100%;
+  }
+}

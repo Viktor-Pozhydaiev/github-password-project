@@ -53,10 +53,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "github-passworg-project:build:production"
+              "browserTarget": "github-password-project:build:production"
             },
             "development": {
-              "browserTarget": "github-passworg-project:build:development"
+              "browserTarget": "github-password-project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "github-passworg-project:build"
+            "browserTarget": "github-password-project:build"
           }
         },
         "test": {
@@ -82,5 +82,12 @@
   },
   "cli": {
     "analytics": "c0eb42c0-2b8d-4d5a-83bc-34087682d1b7"
+  },
+  "lint": {
+    "builder": "@angular-devkit/build-angular:tslint",
+    "options": {
+      "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+      "exclude": ["**/node_modules/**"]
+    }
   }
 }

@@ -1,0 +1,41 @@
+<h1 class="text-primary text-center p-4 bg-light">Pattern Validation</h1>
+<div class="col-md-12">
+  <form [formGroup]="form1">
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input type="text" class="form-control" formControlName="fullname" />
+      <div
+        class="alert alert-danger"
+        *ngIf="!form1.get('fullname').valid && form1.get('fullname').touched"
+      >
+        Atleast 3 characters required and no special character allowed.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email address</label>
+      <input type="email" class="form-control" formControlName="email" />
+      <div
+        class="alert alert-danger"
+        *ngIf="!form1.get('email').valid && form1.get('email').touched"
+      >
+        Invalid email id
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" formControlName="password" />
+      <div
+        class="alert alert-danger"
+        *ngIf="!form1.get('password').valid && form1.get('password').touched"
+      >
+        Password must contain more than 8 characters, 1 upper case letter, and 1
+        special character
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+      Submit
+    </button>
+  </form>
+  {{ form1.value | json }}
+</div>

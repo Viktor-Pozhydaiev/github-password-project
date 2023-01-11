@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+a {
+  color: crimson;
+  cursor: pointer;
+  text-decoration: underline;
+  user-select: none;
+}
+
+input[type="password"] {
+  font-size: inherit;
+  padding: 7px 10px 7px 10px;
+  width: 100%;
+}
+
+.indicator {
+  width: 100%;
+}
+p {
+  font-family: Lato;
+}
