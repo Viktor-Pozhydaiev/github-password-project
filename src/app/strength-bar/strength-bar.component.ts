@@ -9,32 +9,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class StrengthBarComponent {
   constructor(private fb: FormBuilder) {}
   passwordIsValid = false;
-  form2 = this.fb.group({
-    fullname: [
+  form = this.fb.group({
+    password: [
       null,
       [
         Validators.required,
-        Validators.pattern(/^[A-z0-9]*$/),
-        Validators.minLength(3),
+        Validators.pattern(
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+        ),
+        Validators.minLength(8),
       ],
     ],
-    email: [
-      null,
-      [
-        Validators.required,
-        Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
-      ],
-    ],
-    password: [null, [Validators.required]],
   });
-
-  onSubmit() {
-    if (this.form2.valid) {
-      console.log('Form Submitted');
-    } else {
-      console.error('Form values are invalid.');
-    }
-  }
 
   passwordValid(event: boolean) {
     this.passwordIsValid = event;

@@ -15,10 +15,9 @@ import {
       <li class="point" [style.background-color]="bar0"></li>
       <li class="point" [style.background-color]="bar1"></li>
       <li class="point" [style.background-color]="bar2"></li>
-      <li class="point" [style.background-color]="bar3"></li>
     </ul>
     <br />
-    <p class="alert alert-info" *ngIf="msg">{{ msg }}</p>
+    <p class="alert alert-info" *ngIf="message">{{ message }}</p>
   </div>`,
   styles: [
     `
@@ -49,16 +48,15 @@ export class StrengthCheckerComponent implements OnChanges {
   @Input()
   public passwordToVerify!: string;
   @Input()
-  public barLabel!: string;
+  public barLabel: string;
   @Output() passwordStrength = new EventEmitter<boolean>();
-  bar0!: string;
-  bar1!: string;
-  bar2!: string;
-  bar3!: string;
+  bar0: string;
+  bar1: string;
+  bar2: string;
 
-  msg = '';
+  message = '';
 
-  private colors = ['darkred', 'orangered', 'orange', 'yellowgreen'];
+  private colors = ['red', 'yellow', 'green'];
 
   private static checkStrength(p) {
     let force = 0;
@@ -76,13 +74,13 @@ export class StrengthCheckerComponent implements OnChanges {
       passedMatches += flag === true ? 1 : 0;
     }
 
-    force += 2 * p.length + (p.length >= 10 ? 1 : 0);
+    force += 2 * p.length + (p.length >= 8 ? 1 : 0);
     force += passedMatches * 10;
 
     // short password
-    force = p.length <= 8 ? Math.min(force, 10) : force;
+    force = p.length <= 8 ? Math.min(force, 8) : force;
 
-    // poor variety of characters
+    // // poor variety of characters
     force = passedMatches === 1 ? Math.min(force, 10) : force;
     force = passedMatches === 2 ? Math.min(force, 20) : force;
     force = passedMatches === 3 ? Math.min(force, 30) : force;
@@ -97,39 +95,32 @@ export class StrengthCheckerComponent implements OnChanges {
     if (password) {
       const c = this.getColor(StrengthCheckerComponent.checkStrength(password));
       this.setBarColors(c.idx, c.col);
-
+      console.log(c);
       const pwdStrength = StrengthCheckerComponent.checkStrength(password);
       pwdStrength === 40
         ? this.passwordStrength.emit(true)
         : this.passwordStrength.emit(false);
-
       switch (c.idx) {
         case 1:
-          this.msg = 'Poor';
+          this.message = 'Light';
           break;
         case 2:
-          this.msg = 'Not Good';
+          this.message = 'Medium';
           break;
         case 3:
-          this.msg = 'Average';
-          break;
-        case 4:
-          this.msg = 'Good';
+          this.message = 'Good';
           break;
       }
     } else {
-      this.msg = '';
+      this.message = '';
     }
   }
 
-  private getColor(s: number) {
+  private getColor(s: any) {
     let idx = 0;
-    if (s <= 10) {
+    if (s <= 8) {
       idx = 0;
-    } else if (s <= 20) {
-      idx = 1;
-    } else if (s <= 30) {
-      idx = 2;
+      console.log(s);
     } else if (s <= 40) {
       idx = 3;
     } else {
